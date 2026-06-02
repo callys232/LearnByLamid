@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import {
   Menu, X, GraduationCap, BookOpen, LayoutDashboard, Calendar,
-  BarChart3, Award, Settings, Users, Layers, Trophy, GraduationCap as MyLearning,
+  BarChart3, Award, Settings, Users, Layers, Trophy,
   Globe, Building2, PenSquare, LayoutGrid, LogOut, LogIn,
 } from "lucide-react";
 import Link from "next/link";
@@ -14,48 +14,43 @@ import { currentUser } from "@/mock/users";
 import { useAuth } from "@/context/auth-context";
 import type { LucideIcon } from "lucide-react";
 
-interface NavItem {
-  label: string;
-  href: string;
-  icon: LucideIcon;
-}
+interface NavItem { label: string; href: string; icon: LucideIcon }
 
 const learnItems: NavItem[] = [
   { label: "Dashboard",    href: "/dashboard",    icon: LayoutDashboard },
-  { label: "My Learning",  href: "/my-learning",  icon: MyLearning      },
-  { label: "Courses",      href: "/courses",      icon: BookOpen        },
-  { label: "Programs",     href: "/programs",     icon: Layers          },
-  { label: "Events",       href: "/events",       icon: Calendar        },
-  { label: "Leaderboard",  href: "/leaderboard",  icon: Trophy          },
-  { label: "Certificates", href: "/certificates", icon: Award           },
-  { label: "Analytics",    href: "/analytics",    icon: BarChart3       },
+  { label: "My Learning",  href: "/my-learning",  icon: GraduationCap   },
+  { label: "Courses",      href: "/courses",       icon: BookOpen        },
+  { label: "Programs",     href: "/programs",      icon: Layers          },
+  { label: "Events",       href: "/events",        icon: Calendar        },
+  { label: "Leaderboard",  href: "/leaderboard",   icon: Trophy          },
+  { label: "Certificates", href: "/certificates",  icon: Award           },
+  { label: "Analytics",    href: "/analytics",     icon: BarChart3       },
 ];
 
 const instructorItems: NavItem[] = [
-  { label: "My Courses", href: "/instructor/courses", icon: PenSquare  },
-  { label: "Dashboard",  href: "/instructor",         icon: BarChart3  },
+  { label: "My Courses", href: "/instructor/courses", icon: PenSquare },
+  { label: "Dashboard",  href: "/instructor",         icon: BarChart3 },
 ];
 
 const adminItems: NavItem[] = [
-  { label: "Users", href: "/admin/users", icon: Users       },
-  { label: "Admin", href: "/admin",       icon: LayoutGrid  },
+  { label: "Users", href: "/admin/users", icon: Users      },
+  { label: "Admin", href: "/admin",       icon: LayoutGrid },
 ];
 
 const superAdminItems: NavItem[] = [
-  { label: "Platform", href: "/super-admin",         icon: Globe      },
-  { label: "Tenants",  href: "/super-admin/tenants", icon: Building2  },
+  { label: "Platform", href: "/super-admin",         icon: Globe     },
+  { label: "Tenants",  href: "/super-admin/tenants", icon: Building2 },
 ];
 
 function MobileNavLink({ label, href, icon: Icon, onClose }: NavItem & { onClose: () => void }) {
   const pathname = usePathname();
   const active = pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
-
   return (
     <Link
       href={href}
       onClick={onClose}
       className={cn(
-        "flex items-center gap-4 rounded-xl px-4 py-3.5 text-base font-medium transition-all duration-150",
+        "flex items-center gap-4 rounded-xl px-4 py-3.5 text-[15px] font-medium transition-colors",
         active
           ? "bg-primary-muted text-primary"
           : "text-text-secondary hover:bg-surface hover:text-text-primary",
@@ -67,10 +62,10 @@ function MobileNavLink({ label, href, icon: Icon, onClose }: NavItem & { onClose
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function NavSection({ label }: { label: string }) {
   return (
-    <p className="mt-4 mb-1 px-4 text-[11px] font-semibold uppercase tracking-widest text-text-muted">
-      {children}
+    <p className="px-4 pt-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-text-muted">
+      {label}
     </p>
   );
 }
@@ -78,10 +73,10 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 export function MobileMenuButton() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
+  const router   = useRouter();
   const { isAuthenticated, logout } = useAuth();
 
-  const user = currentUser;
+  const user         = currentUser;
   const isInstructor = ["instructor", "admin", "super_admin"].includes(user.role);
   const isAdmin      = ["admin", "super_admin"].includes(user.role);
   const isSuperAdmin = user.role === "super_admin";
@@ -101,6 +96,7 @@ export function MobileMenuButton() {
 
   return (
     <>
+      {/* Hamburger — only visible on mobile */}
       <button
         type="button"
         onClick={() => setOpen(true)}
@@ -118,7 +114,7 @@ export function MobileMenuButton() {
         />
       )}
 
-      {/* Drawer — 85 vw so it fills most of the screen on any phone */}
+      {/* Drawer */}
       <div
         className={cn(
           "fixed left-0 top-0 z-50 flex h-full w-[85vw] max-w-sm flex-col bg-background-secondary border-r border-border lg:hidden",
@@ -126,9 +122,16 @@ export function MobileMenuButton() {
           open ? "translate-x-0 shadow-soft-lg" : "-translate-x-full",
         )}
       >
-        {/* Header */}
+        {/* Drawer header — logo fades in as drawer opens */}
         <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-5">
-          <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-2.5">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className={cn(
+              "flex items-center gap-2.5 transition-all duration-300",
+              open ? "opacity-100 translate-x-0 delay-100" : "opacity-0 -translate-x-2",
+            )}
+          >
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-primary-sm">
               <GraduationCap className="h-4 w-4 text-white" />
             </div>
@@ -136,6 +139,7 @@ export function MobileMenuButton() {
               LAMID <span className="text-primary">Learn</span>
             </span>
           </Link>
+
           <button
             type="button"
             onClick={() => setOpen(false)}
@@ -146,16 +150,16 @@ export function MobileMenuButton() {
           </button>
         </div>
 
-        {/* Nav — scrolls independently */}
-        <nav className="flex-1 overflow-y-auto px-3 py-3">
-          <SectionLabel>Learn</SectionLabel>
+        {/* Scrollable nav */}
+        <nav className="flex-1 overflow-y-auto px-3 py-2">
+          <NavSection label="Learn" />
           {learnItems.map((item) => (
             <MobileNavLink key={item.href} {...item} onClose={() => setOpen(false)} />
           ))}
 
           {isInstructor && (
             <>
-              <SectionLabel>Teach</SectionLabel>
+              <NavSection label="Teach" />
               {instructorItems.map((item) => (
                 <MobileNavLink key={item.href} {...item} onClose={() => setOpen(false)} />
               ))}
@@ -164,7 +168,7 @@ export function MobileMenuButton() {
 
           {isAdmin && (
             <>
-              <SectionLabel>Manage</SectionLabel>
+              <NavSection label="Manage" />
               {adminItems.map((item) => (
                 <MobileNavLink key={item.href} {...item} onClose={() => setOpen(false)} />
               ))}
@@ -173,20 +177,20 @@ export function MobileMenuButton() {
 
           {isSuperAdmin && (
             <>
-              <SectionLabel>Platform</SectionLabel>
+              <NavSection label="Platform" />
               {superAdminItems.map((item) => (
                 <MobileNavLink key={item.href} {...item} onClose={() => setOpen(false)} />
               ))}
             </>
           )}
 
-          <div className="my-3 border-t border-border" />
+          <div className="mx-4 my-3 border-t border-border" />
           <MobileNavLink label="Settings" href="/settings" icon={Settings} onClose={() => setOpen(false)} />
         </nav>
 
-        {/* User footer */}
-        <div className="shrink-0 border-t border-border p-4 space-y-3">
-          <div className="flex items-center gap-3">
+        {/* User footer with sign in / out */}
+        <div className="shrink-0 border-t border-border p-4 space-y-2">
+          <div className="flex items-center gap-3 px-1">
             <Avatar src={user.avatar} name={user.name} size="md" />
             <div className="flex flex-col min-w-0">
               <span className="truncate text-sm font-semibold text-text-primary">{user.name}</span>
@@ -200,7 +204,7 @@ export function MobileMenuButton() {
             <button
               type="button"
               onClick={handleSignOut}
-              className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-red-400 hover:bg-red-500/10 transition-colors"
+              className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-[15px] font-medium text-red-400 hover:bg-red-500/10 transition-colors"
             >
               <LogOut className="h-5 w-5 shrink-0" />
               Sign out
@@ -209,7 +213,7 @@ export function MobileMenuButton() {
             <Link
               href="/login"
               onClick={() => setOpen(false)}
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-primary hover:bg-primary-muted transition-colors"
+              className="flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] font-medium text-primary hover:bg-primary-muted transition-colors"
             >
               <LogIn className="h-5 w-5 shrink-0" />
               Sign in

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "next clean",
+    "fresh": "next clean && next build"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.95.0",
