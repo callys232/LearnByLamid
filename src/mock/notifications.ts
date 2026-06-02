@@ -1,0 +1,53 @@
+import type { Notification } from "@/types/types";
+
+export const mockNotifications: Notification[] = [
+  {
+    id: "notif-001",
+    userId: "user-001",
+    type: "event_starting",
+    title: "Lecture starting in 1 hour",
+    body: "Live Workshop: Empathy Mapping in Practice starts at 3:00 PM",
+    read: false,
+    createdAt: "2026-05-15T14:00:00Z",
+    href: "/events",
+  },
+  {
+    id: "notif-002",
+    userId: "user-001",
+    type: "cert_issued",
+    title: "Certificate issued 🎉",
+    body: "Your UX Research Methods certificate is ready to download",
+    read: false,
+    createdAt: "2026-05-06T10:00:00Z",
+    href: "/certificates",
+  },
+  {
+    id: "notif-003",
+    userId: "user-001",
+    type: "course_reminder",
+    title: "Continue your course",
+    body: "You haven't visited HCD Foundations in 3 days. Pick up where you left off.",
+    read: false,
+    createdAt: "2026-05-04T09:00:00Z",
+    href: "/courses/course-001",
+  },
+  {
+    id: "notif-004",
+    userId: "user-001",
+    type: "badge_earned",
+    title: "Badge unlocked 🔥",
+    body: "You've hit a 12-day learning streak — On Fire!",
+    read: true,
+    createdAt: "2026-05-03T20:00:00Z",
+  },
+  {
+    id: "notif-005",
+    userId: "user-001",
+    type: "new_lecture",
+    title: "New lecture added",
+    body: "Ideation Sprint: How Might We in Action is now available for replay",
+    read: true,
+    createdAt: "2026-04-10T16:00:00Z",
+    href: "/events",
+  },
+];
