@@ -59,10 +59,10 @@ export async function POST(req: NextRequest) {
       keyValue.includes("placeholder");
 
     if (keyMissing) {
-      const fallback = `I'm your AI learning assistant — set \`${meta.envKey}\` in \`.env.local\` to enable real responses (provider: ${meta.name}). Get your free key at ${meta.signupUrl}`;
-      return new Response(fallback, {
-        headers: { "Content-Type": "text/plain" },
-      });
+      return new Response(
+        "The AI assistant is currently unavailable. Please try again later.",
+        { headers: { "Content-Type": "text/plain" } },
+      );
     }
 
     const stream = await streamChatResponse(
@@ -80,7 +80,6 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (err) {
-    console.error("[api/ai/tutor]", err);
     const msg = err instanceof Error ? err.message : "AI service error";
     return new Response(msg, { status: 500 });
   }

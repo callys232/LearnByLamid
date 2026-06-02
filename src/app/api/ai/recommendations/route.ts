@@ -75,8 +75,7 @@ Only include courses from the list above.`;
       : [];
 
     return NextResponse.json({ recommendations });
-  } catch (err) {
-    console.error("[api/ai/recommendations]", err);
+  } catch {
     return NextResponse.json({ recommendations: [] });
   }
 }

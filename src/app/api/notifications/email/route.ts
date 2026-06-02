@@ -67,8 +67,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ id: result.id, sent: true });
-  } catch (err) {
-    console.error("[api/notifications/email]", err);
+  } catch {
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }

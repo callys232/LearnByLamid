@@ -5,13 +5,12 @@ import { usePathname } from "next/navigation";
 import {
   X,
   Send,
-  Sparkles,
   ChevronDown,
-  Bot,
   RotateCcw,
   Maximize2,
   Minimize2,
 } from "lucide-react";
+import { BotGradIcon } from "@/components/ui/bot-grad-icon";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { mockCourses } from "@/mock/courses";
@@ -297,7 +296,7 @@ export function AiChatWidget() {
           >
             {/* Ping ring */}
             <span className="absolute inset-0 rounded-full bg-primary opacity-30 animate-ping" />
-            <Sparkles className="relative h-6 w-6" />
+            <BotGradIcon className="relative h-6 w-6" />
 
             {/* Unread badge */}
             {unread > 0 && (
@@ -331,7 +330,7 @@ export function AiChatWidget() {
           <div className="flex items-center gap-2.5">
             {/* Branded icon */}
             <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-primary shadow-primary-sm">
-              <Bot className="h-4 w-4 text-white" />
+              <BotGradIcon className="h-4 w-4 text-white" />
               <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-background-secondary bg-emerald-400" />
             </div>
             <div className="leading-none">
@@ -404,7 +403,7 @@ export function AiChatWidget() {
             >
               {msg.role === "assistant" && (
                 <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-muted">
-                  <Bot className="h-3.5 w-3.5 text-primary" />
+                  <BotGradIcon className="h-3.5 w-3.5 text-primary" />
                 </div>
               )}
               <div

@@ -1,7 +1,8 @@
-﻿import { GraduationCap } from "lucide-react";
+﻿import Link from "next/link";
+import { GraduationCap } from "lucide-react";
 import { NavLink } from "./nav-link";
 import { ThemeToggle } from "./theme-toggle";
-import { Avatar } from "@/components/ui/avatar";
+import { UserMenu } from "./user-menu";
 import { currentUser } from "@/mock/users";
 
 const navItems = [
@@ -39,14 +40,17 @@ export function Sidebar() {
   return (
     <aside className="hidden lg:flex h-screen w-60 shrink-0 flex-col border-r border-border bg-background-secondary">
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-border px-5">
+      <Link
+        href="/"
+        className="flex h-16 items-center gap-3 border-b border-border px-5 transition-opacity hover:opacity-80"
+      >
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary shadow-primary-sm">
           <GraduationCap className="h-4 w-4 text-white" />
         </div>
         <span className="text-base font-bold tracking-tight text-text-primary">
           LAMID <span className="text-primary">Learn</span>
         </span>
-      </div>
+      </Link>
 
       {/* Nav */}
       <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-4 no-scrollbar">
@@ -104,18 +108,13 @@ export function Sidebar() {
 
       {/* User footer */}
       <div className="border-t border-border p-3 space-y-1">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-3 flex-1 min-w-0 rounded-lg px-2 py-2 transition-colors hover:bg-surface cursor-pointer">
-            <Avatar src={user.avatar} name={user.name} size="sm" />
-            <div className="flex flex-col min-w-0">
-              <span className="truncate text-sm font-medium text-text-primary">
-                {user.name}
-              </span>
-              <span className="truncate text-xs text-text-muted capitalize">
-                {user.role.replace("_", " ")} · {user.xp.toLocaleString()} XP
-              </span>
-            </div>
-          </div>
+        <UserMenu
+          name={user.name}
+          avatar={user.avatar}
+          role={user.role}
+          xp={user.xp}
+        />
+        <div className="flex justify-end">
           <ThemeToggle />
         </div>
       </div>

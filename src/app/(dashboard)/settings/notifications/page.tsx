@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/layout";
 import { Card, CardContent, CardHeader, CardTitle, Button, BreadcrumbNav, Separator } from "@/components/ui";
 import { currentUser } from "@/mock/users";
@@ -45,9 +45,22 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
   );
 }
 
+const STORAGE_KEY = "lamid:settings:notifications";
+
 export default function NotificationsSettingsPage() {
   const [prefs, setPrefs] = useState<NotifPref[]>(DEFAULTS);
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const stored = JSON.parse(raw) as NotifPref[];
+        // Merge stored values with DEFAULTS to handle new pref additions
+        setPrefs(DEFAULTS.map((d) => stored.find((s) => s.id === d.id) ?? d));
+      }
+    } catch { /* storage unavailable */ }
+  }, []);
 
   function update(id: string, channel: "email" | "inApp", value: boolean) {
     setPrefs((prev) => prev.map((p) => p.id === id ? { ...p, [channel]: value } : p));
@@ -55,6 +68,9 @@ export default function NotificationsSettingsPage() {
   }
 
   function handleSave() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    } catch { /* storage unavailable */ }
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   }

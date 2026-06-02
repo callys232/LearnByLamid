@@ -1,11 +1,21 @@
-﻿"use client";
+"use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/layout";
 import { Card, CardContent, CardHeader, CardTitle, Input, Button, Separator, Badge } from "@/components/ui";
 import { useToast } from "@/components/ui/toast";
 import { mockTenants, mockServiceCategories } from "@/mock/tenants";
 import { currentUser } from "@/mock/users";
+
+const BRANDING_KEY = "lamid:settings:branding";
+const ACCOUNT_KEY  = "lamid:settings:account";
+
+function readStorage<T>(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch { return fallback; }
+}
 
 export default function SettingsPage() {
   const toast  = useToast();
@@ -18,9 +28,24 @@ export default function SettingsPage() {
   const [email,      setEmail]      = useState(currentUser.email);
   const [password,   setPassword]   = useState("");
 
+  // Restore persisted values on mount
+  useEffect(() => {
+    const b = readStorage(BRANDING_KEY, { orgName: tenant.name, subdomain: tenant.slug, brandColor: tenant.primaryColor });
+    setOrgName(b.orgName);
+    setSubdomain(b.subdomain);
+    setBrandColor(b.brandColor);
+
+    const a = readStorage(ACCOUNT_KEY, { name: currentUser.name, email: currentUser.email });
+    setName(a.name);
+    setEmail(a.email);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function saveBranding() {
-    // Swap with PATCH /api/tenants/:id when DB is wired
-    toast("Branding saved successfully.", "success");
+    try {
+      localStorage.setItem(BRANDING_KEY, JSON.stringify({ orgName, subdomain, brandColor }));
+    } catch { /* storage unavailable */ }
+    toast("Branding saved.", "success");
   }
 
   function saveAccount() {
@@ -28,9 +53,11 @@ export default function SettingsPage() {
       toast("Name and email are required.", "error");
       return;
     }
-    // Swap with PATCH /api/users/:id when DB is wired
+    try {
+      localStorage.setItem(ACCOUNT_KEY, JSON.stringify({ name, email }));
+    } catch { /* storage unavailable */ }
     setPassword("");
-    toast("Account updated successfully.", "success");
+    toast("Account updated.", "success");
   }
 
   function deleteAccount() {
@@ -76,9 +103,7 @@ export default function SettingsPage() {
 
         {/* Service categories */}
         <Card>
-          <CardHeader>
-            <CardTitle>Service Categories</CardTitle>
-          </CardHeader>
+          <CardHeader><CardTitle>Service Categories</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <p className="text-xs text-text-secondary">
               Categories tag your courses and filter analytics. LAMID uses HCD, BIZ, and SD.

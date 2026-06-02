@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { Header } from "@/components/layout";
 import { BreadcrumbNav } from "@/components/ui";
@@ -10,6 +10,7 @@ import { mockLearnerProgress } from "@/mock/analytics";
 import { mockLearnerProfiles, currentUser } from "@/mock/users";
 import { mockServiceCategories } from "@/mock/tenants";
 import { cn } from "@/lib/utils";
+import { paginate } from "@/lib/paginate";
 
 type SortOption = "popular" | "rating" | "newest" | "price-asc" | "price-desc";
 type PriceFilter = "all" | "free" | "paid";
@@ -47,6 +48,7 @@ export default function CoursesPage() {
   const [level, setLevel] = useState<string | null>(null);
   const [price, setPrice] = useState<PriceFilter>("all");
   const [sort, setSort] = useState<SortOption>("popular");
+  const [page, setPage] = useState(1);
 
   const profile = mockLearnerProfiles.find((p) => p.id === currentUser.id);
   const enrolledIds = new Set(profile?.enrolledCourseIds ?? []);
@@ -95,6 +97,10 @@ export default function CoursesPage() {
     }
   }, [query, category, level, price, sort]);
 
+  // Reset to page 1 whenever filters change
+  useEffect(() => { setPage(1); }, [query, category, level, price, sort]);
+
+  const { items: paged, total, pages } = paginate(filtered, page);
   const hasFilters = !!(query || category || level || price !== "all");
   const featuredCourses = useMemo(
     () =>
@@ -217,7 +223,7 @@ export default function CoursesPage() {
               </div>
 
               <p className="text-sm text-text-muted shrink-0">
-                {filtered.length} course{filtered.length !== 1 ? "s" : ""}
+                {total} course{total !== 1 ? "s" : ""}
               </p>
 
               <select
@@ -235,39 +241,69 @@ export default function CoursesPage() {
             </div>
 
             {/* Course grid */}
-            {filtered.length === 0 ? (
+            {total === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <Search className="h-10 w-10 text-text-muted mb-3" />
-                <p className="text-sm font-medium text-text-primary">
-                  No courses found
-                </p>
-                <p className="text-xs text-text-muted mt-1">
-                  Try adjusting your search or filters.
-                </p>
+                <p className="text-sm font-medium text-text-primary">No courses found</p>
+                <p className="text-xs text-text-muted mt-1">Try adjusting your search or filters.</p>
                 <button
                   type="button"
-                  onClick={() => {
-                    setQuery("");
-                    setCategory(null);
-                    setLevel(null);
-                    setPrice("all");
-                  }}
+                  onClick={() => { setQuery(""); setCategory(null); setLevel(null); setPrice("all"); }}
                   className="mt-4 text-sm text-primary hover:underline"
                 >
                   Clear all filters
                 </button>
               </div>
             ) : (
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {filtered.map((course) => (
-                  <CourseCard
-                    key={course.id}
-                    course={course}
-                    progress={getProgress(course.id)}
-                    isEnrolled={enrolledIds.has(course.id)}
-                  />
-                ))}
-              </div>
+              <>
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                  {paged.map((course) => (
+                    <CourseCard
+                      key={course.id}
+                      course={course}
+                      progress={getProgress(course.id)}
+                      isEnrolled={enrolledIds.has(course.id)}
+                    />
+                  ))}
+                </div>
+
+                {/* Pagination */}
+                {pages > 1 && (
+                  <div className="flex items-center justify-center gap-2 mt-8">
+                    <button
+                      type="button"
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={page === 1}
+                      className="rounded-lg border border-border px-3 py-1.5 text-sm text-text-secondary hover:bg-surface disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Previous
+                    </button>
+                    {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() => setPage(p)}
+                        className={cn(
+                          "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors",
+                          p === page
+                            ? "bg-primary text-white"
+                            : "border border-border text-text-secondary hover:bg-surface",
+                        )}
+                      >
+                        {p}
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => setPage((p) => Math.min(pages, p + 1))}
+                      disabled={page === pages}
+                      className="rounded-lg border border-border px-3 py-1.5 text-sm text-text-secondary hover:bg-surface disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

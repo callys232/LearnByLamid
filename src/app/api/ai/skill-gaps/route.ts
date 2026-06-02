@@ -115,8 +115,7 @@ Return ONLY valid JSON (max 4 gaps, 3 strengths, 3 suggestions):
       : { gaps: [], strengths: [], suggestions: [], overallScore: 0 };
 
     return NextResponse.json(result);
-  } catch (err) {
-    console.error("[api/ai/skill-gaps]", err);
+  } catch {
     return NextResponse.json({
       gaps: [],
       strengths: [],

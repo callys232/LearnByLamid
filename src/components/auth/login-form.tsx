@@ -7,12 +7,14 @@ import { signIn } from "next-auth/react";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/auth-context";
 import { setCurrentUserByEmail } from "@/mock/users";
 
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/dashboard";
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,14 +36,12 @@ export function LoginForm() {
     setLoading(false);
 
     if (result?.error) {
-      setError(
-        result.error === "CredentialsSignin"
-          ? "Invalid email or password. Try amara@lamid.co with any password."
-          : result.error,
-      );
+      setError("Invalid email or password.");
       return;
     }
 
+    // Sync AuthContext and mock user state
+    await login(email, password);
     setCurrentUserByEmail(email);
     router.push(redirect);
     router.refresh();

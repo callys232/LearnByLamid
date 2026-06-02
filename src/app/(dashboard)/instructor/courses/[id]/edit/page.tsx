@@ -124,8 +124,7 @@ export default function EditCoursePage() {
       });
       if (!response.ok) throw new Error("Unable to save.");
       router.push("/instructor/courses");
-    } catch (error) {
-      console.error(error);
+    } catch {
       setSaving(false);
     }
   }

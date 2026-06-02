@@ -1,8 +1,10 @@
-﻿"use client";
+"use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { User } from "@/types/types";
-import { currentUser as mockCurrentUser, mockUsers } from "@/mock/users";
+import { mockUsers } from "@/mock/users";
+
+const STORAGE_KEY = "lamid:user-email";
 
 interface AuthContextValue {
   user: User | null;
@@ -14,28 +16,51 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(mockCurrentUser);
+  const [user, setUser] = useState<User | null>(null);
 
-  async function login(email: string, _password: string): Promise<boolean> {
-    // Mock auth: find user by email; any non-empty password is accepted until real backend is wired
+  // Restore session from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const found = mockUsers.find(
+          (u) => u.email.toLowerCase() === saved.toLowerCase(),
+        );
+        if (found) setUser(found);
+      }
+    } catch {
+      // localStorage unavailable (SSR / private browsing)
+    }
+  }, []);
+
+  async function login(email: string, password: string): Promise<boolean> {
     const found = mockUsers.find(
       (u) => u.email.toLowerCase() === email.toLowerCase(),
     );
-    if (found && _password.length > 0) {
-      setUser(found);
-      return true;
-    }
-    return false;
+    if (!found) return false;
+
+    // Enforce password when one is set on the account
+    if (found.password && found.password !== password) return false;
+
+    // Reject deactivated accounts
+    if (found.verificationStatus === "rejected") return false;
+
+    setUser(found);
+    try {
+      localStorage.setItem(STORAGE_KEY, found.email);
+    } catch { /* ignore */ }
+    return true;
   }
 
   function logout() {
     setUser(null);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch { /* ignore */ }
   }
 
   return (
-    <AuthContext.Provider
-      value={{ user, isAuthenticated: !!user, login, logout }}
-    >
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

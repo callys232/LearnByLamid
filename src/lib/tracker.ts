@@ -36,11 +36,6 @@ export function track(event: TrackEvent, payload?: Omit<TrackPayload, "event">) 
     ...payload,
   };
 
-  if (process.env.NODE_ENV === "development") {
-    console.log(`[track] ${event}`, body);
-    return;
-  }
-
   // Swap with real analytics call — fire-and-forget
   fetch("/api/track", {
     method:    "POST",

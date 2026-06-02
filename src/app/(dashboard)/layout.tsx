@@ -3,6 +3,7 @@
 import { Sidebar } from "@/components/layout/sidebar";
 import { GuestBanner } from "@/components/layout/guest-banner";
 import { BgPattern } from "@/components/ui/bg-pattern";
+import { AnimatedBg } from "@/components/ui/animated-bg";
 import { ToastProvider } from "@/components/ui/toast";
 import { AiChatWidget } from "@/components/ai";
 
@@ -14,6 +15,7 @@ export default function DashboardLayout({
   return (
     <ToastProvider>
       <BgPattern variant="dots" glow>
+        <AnimatedBg />
         <div className="flex h-screen overflow-hidden bg-background">
           <Sidebar />
           <div className="flex flex-1 flex-col overflow-hidden">

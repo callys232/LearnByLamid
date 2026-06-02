@@ -1,7 +1,8 @@
 ﻿"use client";
 
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Bot, Sparkles } from "lucide-react";
+import { X, Send, Sparkles } from "lucide-react";
+import { BotGradIcon } from "@/components/ui/bot-grad-icon";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -157,7 +158,7 @@ export function AiTutor({
         <div className="flex items-center justify-between border-b border-border px-4 py-3">
           <div className="flex items-center gap-2">
             <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary-muted">
-              <Bot className="h-4 w-4 text-primary" />
+              <BotGradIcon className="h-4 w-4 text-primary" />
             </div>
             <div>
               <p className="text-sm font-semibold text-text-primary">

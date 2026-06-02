@@ -11,7 +11,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error);
+    // Wire to error monitoring (e.g. Sentry) when available
   }, [error]);
 
   return (

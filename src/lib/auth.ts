@@ -21,6 +21,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         );
         if (!user) return null;
 
+        if (user.password && user.password !== (credentials.password as string)) {
+          return null;
+        }
+
         if (user.verificationStatus === "rejected") {
           throw new Error("Your account request has been rejected.");
         }

@@ -20,11 +20,7 @@ export async function sendEmail(payload: EmailPayload): Promise<{ id?: string; e
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey || apiKey.includes("your-")) {
-    // Dev mode: log to console instead of sending
-    console.log("[email] Dev mode — would send:", {
-      to:      payload.to,
-      subject: payload.subject,
-    });
+    // No key configured — silently skip (dev/staging)
     return { id: `dev-${Date.now()}` };
   }
 
