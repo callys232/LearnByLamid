@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { LogOut, LogIn, Settings, ChevronUp } from "lucide-react";
+import { LogOut, LogIn, Settings } from "lucide-react";
 import Link from "next/link";
 import { Avatar } from "@/components/ui/avatar";
 import { useAuth } from "@/context/auth-context";
@@ -79,28 +79,22 @@ export function UserMenu({ name, avatar, role, xp }: UserMenuProps) {
         </div>
       )}
 
-      {/* Trigger */}
+      {/* Trigger — looks identical to the original user footer row */}
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         className={cn(
-          "flex w-full items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-surface",
+          "flex w-full items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-surface cursor-pointer",
           open && "bg-surface",
         )}
       >
         <Avatar src={avatar} name={name} size="sm" />
-        <div className="flex flex-col min-w-0 flex-1 text-left">
+        <div className="flex flex-col min-w-0 text-left">
           <span className="truncate text-sm font-medium text-text-primary">{name}</span>
           <span className="truncate text-xs text-text-muted capitalize">
             {role.replace("_", " ")} · {xp.toLocaleString()} XP
           </span>
         </div>
-        <ChevronUp
-          className={cn(
-            "h-3.5 w-3.5 shrink-0 text-text-muted transition-transform duration-200",
-            open ? "rotate-0" : "rotate-180",
-          )}
-        />
       </button>
     </div>
   );

@@ -107,14 +107,16 @@ export function Sidebar() {
       </nav>
 
       {/* User footer */}
-      <div className="border-t border-border p-3 space-y-1">
-        <UserMenu
-          name={user.name}
-          avatar={user.avatar}
-          role={user.role}
-          xp={user.xp}
-        />
-        <div className="flex justify-end">
+      <div className="border-t border-border p-3">
+        <div className="flex items-center gap-2">
+          <div className="flex-1 min-w-0">
+            <UserMenu
+              name={user.name}
+              avatar={user.avatar}
+              role={user.role}
+              xp={user.xp}
+            />
+          </div>
           <ThemeToggle />
         </div>
       </div>
