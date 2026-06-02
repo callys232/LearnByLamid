@@ -21,6 +21,13 @@
     --color-text-secondary: #a3a3a3;
     --color-text-muted: #525252;
     --color-text-inverse: #0a0a0a;
+
+    /* RGB channel variables — required for Tailwind opacity modifiers (bg-primary/20 etc.) */
+    --color-primary-ch:    193 33 41;
+    --color-bg-ch:         10 10 10;
+    --color-bg-sec-ch:     15 15 15;
+    --color-surface-ch:    23 23 23;
+    --color-border-ch:     34 34 34;
   }
 
   .light {
@@ -37,6 +44,12 @@
     --color-text-secondary: #4b5563;
     --color-text-muted: #6b7280;
     --color-text-inverse: #ffffff;
+
+    /* RGB channels for light theme */
+    --color-bg-ch:         247 247 248;
+    --color-bg-sec-ch:     242 244 248;
+    --color-surface-ch:    255 255 255;
+    --color-border-ch:     209 213 219;
   }
 
   * {

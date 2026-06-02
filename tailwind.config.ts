@@ -11,23 +11,24 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "var(--color-primary)",
+          // rgb() channel format enables opacity modifiers: bg-primary/20, border-primary/50 etc.
+          DEFAULT: "rgb(var(--color-primary-ch) / <alpha-value>)",
           hover: "var(--color-primary-hover)",
           light: "var(--color-primary-light)",
           muted: "var(--color-primary-muted)",
         },
         background: {
-          DEFAULT: "var(--color-bg)",
-          secondary: "var(--color-background-secondary)",
+          DEFAULT: "rgb(var(--color-bg-ch) / <alpha-value>)",
+          secondary: "rgb(var(--color-bg-sec-ch) / <alpha-value>)",
           tertiary: "var(--color-background-tertiary)",
         },
         surface: {
-          DEFAULT: "var(--color-surface)",
+          DEFAULT: "rgb(var(--color-surface-ch) / <alpha-value>)",
           hover: "var(--color-surface-hover)",
           active: "var(--color-surface-active)",
         },
         border: {
-          DEFAULT: "var(--color-border)",
+          DEFAULT: "rgb(var(--color-border-ch) / <alpha-value>)",
           muted: "var(--color-border-muted)",
           strong: "var(--color-border-strong)",
         },

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import {
   Menu, X, GraduationCap, BookOpen, LayoutDashboard, Calendar,
   BarChart3, Award, Settings, Users, Layers, Trophy,
@@ -71,10 +72,13 @@ function NavSection({ label }: { label: string }) {
 }
 
 export function MobileMenuButton() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]       = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router   = useRouter();
   const { isAuthenticated, logout } = useAuth();
+
+  useEffect(() => { setMounted(true); }, []);
 
   const user         = currentUser;
   const isInstructor = ["instructor", "admin", "super_admin"].includes(user.role);
@@ -94,22 +98,12 @@ export function MobileMenuButton() {
     router.push("/login");
   }
 
-  return (
+  const overlay = mounted ? createPortal(
     <>
-      {/* Hamburger — only visible on mobile */}
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="flex lg:hidden h-9 w-9 items-center justify-center rounded-lg text-text-secondary hover:bg-surface hover:text-text-primary transition-all"
-        aria-label="Open menu"
-      >
-        <Menu className="h-5 w-5" />
-      </button>
-
       {/* Backdrop */}
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden animate-fade-in"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm animate-fade-in"
           onClick={() => setOpen(false)}
         />
       )}
@@ -117,7 +111,7 @@ export function MobileMenuButton() {
       {/* Drawer */}
       <div
         className={cn(
-          "fixed left-0 top-0 z-50 flex h-full w-[85vw] max-w-sm flex-col bg-background-secondary border-r border-border lg:hidden",
+          "fixed left-0 top-0 z-50 flex h-full w-[85vw] max-w-sm flex-col bg-background-secondary border-r border-border",
           "transition-transform duration-300 ease-out-expo",
           open ? "translate-x-0 shadow-soft-lg" : "-translate-x-full",
         )}
@@ -221,6 +215,24 @@ export function MobileMenuButton() {
           )}
         </div>
       </div>
+    </>,
+    document.body
+  ) : null;
+
+  return (
+    <>
+      {/* Hamburger — stays in the header's normal flow */}
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="flex lg:hidden h-9 w-9 items-center justify-center rounded-lg text-text-secondary hover:bg-surface hover:text-text-primary transition-all"
+        aria-label="Open menu"
+      >
+        <Menu className="h-5 w-5" />
+      </button>
+
+      {/* Backdrop + drawer rendered at document.body — escapes header stacking context */}
+      {overlay}
     </>
   );
 }
