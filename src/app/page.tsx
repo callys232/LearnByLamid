@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { AnimatedBg } from "@/components/ui/animated-bg";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
-      <div className="relative flex flex-col items-center text-center max-w-2xl">
+    <main className="relative flex min-h-screen flex-col items-center justify-center bg-background px-4">
+      <AnimatedBg />
+      <div className="relative z-10 flex flex-col items-center text-center max-w-2xl">
         {/* Glow backdrop */}
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary-muted rounded-full blur-3xl pointer-events-none" />
 

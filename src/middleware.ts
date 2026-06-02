@@ -32,7 +32,7 @@ export default auth((req) => {
   }
 
   // Role guard: admin-only routes
-  const role = session.user.role;
+  const role = session?.user?.role;
   if (ADMIN_PATHS.some((p) => pathname.startsWith(p))) {
     if (role !== "admin" && role !== "super_admin") {
       return NextResponse.redirect(new URL("/dashboard", req.url));

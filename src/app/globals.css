@@ -71,28 +71,11 @@
 
 @layer components {
   /* ── Brand helpers ── */
-  .lamid-gradient {
-    background: linear-gradient(135deg, #c12129 0%, #7a1219 100%);
-  }
-  .lamid-glow {
-    box-shadow: 0 0 28px rgba(193, 33, 41, 0.3);
-  }
   .text-gradient-red {
     background: linear-gradient(135deg, #c12129, #e8353d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-  }
-
-  /* ── Glass surface ── */
-  .glass-surface {
-    @apply bg-surface/80 backdrop-blur-md border border-border;
-  }
-  .glass-card {
-    background: rgba(23, 23, 23, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   /* ── Lift (gentle hover rise) ── */

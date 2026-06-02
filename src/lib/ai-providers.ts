@@ -28,7 +28,7 @@ export const PROVIDER_META: Record<
   { name: string; free: boolean; speed: string; envKey: string; signupUrl: string }
 > = {
   anthropic: {
-    name:      "Claude",
+    name:      "LAMID AI",
     free:      false,
     speed:     "fast",
     envKey:    "ANTHROPIC_API_KEY",

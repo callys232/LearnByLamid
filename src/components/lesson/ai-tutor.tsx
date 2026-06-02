@@ -163,7 +163,7 @@ export function AiTutor({
               <p className="text-sm font-semibold text-text-primary">
                 AI Tutor
               </p>
-              <p className="text-[10px] text-text-muted">Powered by Claude</p>
+              <p className="text-[10px] text-text-muted">Powered by LAMID AI</p>
             </div>
           </div>
           <button

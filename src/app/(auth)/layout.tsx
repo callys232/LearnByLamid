@@ -1,10 +1,12 @@
 import { GraduationCap } from "lucide-react";
+import { AnimatedBg } from "@/components/ui/animated-bg";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="relative flex min-h-screen bg-background">
+      <AnimatedBg />
       {/* Left panel — branding */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col justify-between bg-background-secondary border-r border-border p-12">
+      <div className="relative z-10 hidden lg:flex lg:w-1/2 flex-col justify-between bg-background-secondary/80 border-r border-border p-12">
         <div className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary">
             <GraduationCap className="h-5 w-5 text-white" />
@@ -38,7 +40,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       </div>
 
       {/* Right panel — form */}
-      <div className="flex flex-1 items-center justify-center px-6 py-12">
+      <div className="relative z-10 flex flex-1 items-center justify-center px-6 py-12">
         <div className="w-full max-w-sm">{children}</div>
       </div>
     </div>

@@ -17,12 +17,9 @@ export async function GET() {
     !keyValue.includes("placeholder");
 
   return NextResponse.json({
-    provider,
-    model,
     name: meta.name,
     free: meta.free,
     speed: meta.speed,
     keySet,
-    signupUrl: meta.signupUrl,
   });
 }

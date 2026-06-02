@@ -1,4 +1,6 @@
-﻿import { cn } from "@/lib/utils";
+﻿"use client";
+
+import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 type PatternVariant = "dots" | "lines" | "grid" | "none";
