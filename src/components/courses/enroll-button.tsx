@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Course } from "@/types/types";
+import { Course } from "@/types/types";
 
 interface EnrollButtonProps {
   course: Course;

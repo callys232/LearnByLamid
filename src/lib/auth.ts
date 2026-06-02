@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
+﻿import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { mockUsers, setCurrentUserByEmail } from "@/mock/users";
-import type { UserRole } from "@/types/types";
+import { UserRole } from "@/types/types";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.AUTH_SECRET,

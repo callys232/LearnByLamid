@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Bell, X, Check } from "lucide-react";
 import { cn, relativeTime } from "@/lib/utils";
-import type { Notification } from "@/types/types";
+import { Notification } from "@/types/types";
 import { mockNotifications } from "@/mock/notifications";
 
 const typeIcon: Record<Notification["type"], string> = {

@@ -1,7 +1,7 @@
-import type { LearningEvent } from "@/types/types";
+﻿import { LearningEvent } from "@/types/types";
 
 export const mockEvents: LearningEvent[] = [
-  // ── Live ──────────────────────────────────────────────────────────────────
+  // â”€â”€ Live â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: "event-004",
     tenantId: "tenant-lamid",
@@ -21,7 +21,7 @@ export const mockEvents: LearningEvent[] = [
     tags: ["live", "fullstack"],
   },
 
-  // ── Upcoming ──────────────────────────────────────────────────────────────
+  // â”€â”€ Upcoming â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: "event-001",
     tenantId: "tenant-lamid",
@@ -85,7 +85,7 @@ export const mockEvents: LearningEvent[] = [
     tags: ["hcd", "workshop"],
   },
 
-  // ── Completed with recordings ─────────────────────────────────────────────
+  // â”€â”€ Completed with recordings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: "event-003",
     tenantId: "tenant-lamid",
@@ -128,7 +128,7 @@ export const mockEvents: LearningEvent[] = [
     tags: ["hcd", "ideation"],
   },
 
-  // ── Completed without recording (Ended) ───────────────────────────────────
+  // â”€â”€ Completed without recording (Ended) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   {
     id: "event-007",
     tenantId: "tenant-lamid",

@@ -1,4 +1,4 @@
-import type { Module, Lesson, Quiz } from "@/types/types";
+﻿import { Module, Lesson, Quiz } from "@/types/types";
 
 export const mockModules: Module[] = [
   {

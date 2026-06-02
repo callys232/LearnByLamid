@@ -1,6 +1,6 @@
 ﻿import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { relativeTime } from "@/lib/utils";
-import type { ActivityItem } from "@/types/types";
+import { ActivityItem } from "@/types/types";
 
 interface ActivityFeedProps {
   items: ActivityItem[];

@@ -4,7 +4,7 @@ import { Search, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { NotificationBell } from "@/components/notifications";
-import type { User } from "@/types/types";
+import { User } from "@/types/types";
 
 interface HeaderActionsProps {
   user: Pick<User, "name" | "streak"> & { avatar?: User["avatar"] };

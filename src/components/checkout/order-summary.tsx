@@ -1,7 +1,7 @@
 ﻿import { Clock, BookOpen, Award, ShieldCheck } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import type { Course } from "@/types/types";
+import { Course } from "@/types/types";
 import { formatMinutes } from "@/lib/utils";
 
 interface OrderSummaryProps {

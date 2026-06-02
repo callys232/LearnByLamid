@@ -1,6 +1,6 @@
 ﻿import { HeaderActions } from "./header-actions";
 import { MobileMenuButton } from "./mobile-drawer";
-import type { User } from "@/types/types";
+import { User } from "@/types/types";
 
 interface HeaderProps {
   title: string;

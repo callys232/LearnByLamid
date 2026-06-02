@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { mockCourses } from "@/mock/courses";
 import type { SkillGapResult } from "@/app/api/ai/skill-gaps/route";
-import type { LearnerProgress, QuizAttempt } from "@/types/types";
+import { LearnerProgress, QuizAttempt } from "@/types/types";
 
 interface SkillGapPanelProps {
   progress: LearnerProgress[];

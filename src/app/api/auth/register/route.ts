@@ -1,6 +1,6 @@
 ﻿import { NextResponse } from "next/server";
 import { mockUsers, setCurrentUserById } from "@/mock/users";
-import type { AccountType, User } from "@/types/types";
+import { AccountType, User } from "@/types/types";
 
 export async function POST(req: Request) {
   const body = await req.json();

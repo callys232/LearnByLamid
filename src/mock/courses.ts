@@ -1,4 +1,4 @@
-import type { Course, Program } from "@/types/types";
+﻿import { Course, Program } from "@/types/types";
 
 export const mockPrograms: Program[] = [
   {
@@ -6,7 +6,7 @@ export const mockPrograms: Program[] = [
     tenantId: "tenant-lamid",
     title: "HCD Practitioner Track",
     description:
-      "A comprehensive program covering all stages of human-centered design — from research to prototyping to handoff.",
+      "A comprehensive program covering all stages of human-centered design â€” from research to prototyping to handoff.",
     categoryId: "cat-hcd",
     courseIds: ["course-001", "course-002", "course-003"],
     status: "published",

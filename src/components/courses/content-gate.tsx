@@ -1,7 +1,7 @@
 ﻿import Link from "next/link";
 import { Lock, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Course } from "@/types/types";
+import { Course } from "@/types/types";
 
 interface ContentGateProps {
   course: Course;

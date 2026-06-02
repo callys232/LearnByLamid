@@ -22,7 +22,7 @@ import {
 import { mockServiceCategories } from "@/mock/tenants";
 import { currentUser } from "@/mock/users";
 import { cn } from "@/lib/utils";
-import type { DifficultyLevel, AccessType, ContentStatus } from "@/types/types";
+import { DifficultyLevel, AccessType, ContentStatus } from "@/types/types";
 
 type Step = "info" | "modules" | "quizzes" | "review";
 const STEPS: { id: Step; label: string; icon: React.ElementType }[] = [

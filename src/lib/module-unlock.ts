@@ -1,4 +1,4 @@
-import type { Module, LearnerProgress, QuizAttempt } from "@/types/types";
+﻿import { Module, LearnerProgress, QuizAttempt } from "@/types/types";
 import { mockQuizzes, mockLessons } from "@/mock/modules";
 
 /**
@@ -37,7 +37,7 @@ export function isModuleUnlocked(
     ),
   );
 
-  if (checkpoints.length === 0) return true; // no checkpoints — just needs completion
+  if (checkpoints.length === 0) return true; // no checkpoints â€” just needs completion
 
   return checkpoints.every((quiz) => {
     const attempt = progress?.quizAttempts.find(

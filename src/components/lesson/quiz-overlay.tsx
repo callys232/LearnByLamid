@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2, XCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Quiz } from "@/types/types";
+import { Quiz } from "@/types/types";
 
 interface QuizOverlayProps {
   quiz: Quiz;

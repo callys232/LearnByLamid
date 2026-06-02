@@ -1,4 +1,4 @@
-import type { User, LearnerProfile } from "@/types/types";
+﻿import { User, LearnerProfile } from "@/types/types";
 
 export const mockUsers: User[] = [
   {
@@ -10,7 +10,7 @@ export const mockUsers: User[] = [
     role: "super_admin",
     xp: 99999,
     streak: 365,
-    headline: "LAMID Platform · Founder",
+    headline: "LAMID Platform Â· Founder",
     joinedAt: "2023-01-01T00:00:00Z",
     lastActiveAt: "2026-05-07T08:00:00Z",
     accountType: "individual",
@@ -25,7 +25,7 @@ export const mockUsers: User[] = [
     role: "learner",
     xp: 3420,
     streak: 12,
-    headline: "UX Researcher · HCD Track",
+    headline: "UX Researcher Â· HCD Track",
     joinedAt: "2024-09-01T00:00:00Z",
     lastActiveAt: "2026-05-06T14:30:00Z",
     accountType: "individual",
@@ -40,7 +40,7 @@ export const mockUsers: User[] = [
     role: "instructor",
     xp: 8900,
     streak: 45,
-    headline: "Product Designer · Course Author",
+    headline: "Product Designer Â· Course Author",
     joinedAt: "2023-03-15T00:00:00Z",
     lastActiveAt: "2026-05-07T09:00:00Z",
     accountType: "individual",
@@ -85,7 +85,7 @@ export const mockUsers: User[] = [
     role: "learner",
     xp: 5760,
     streak: 21,
-    headline: "Business Strategist · BIZ Track",
+    headline: "Business Strategist Â· BIZ Track",
     joinedAt: "2025-03-20T00:00:00Z",
     lastActiveAt: "2026-05-07T07:45:00Z",
     accountType: "individual",
@@ -160,7 +160,7 @@ export const mockLearnerProfiles: LearnerProfile[] = [
   },
 ];
 
-export let currentUser = mockUsers[1]; // Amara Osei — learner
+export let currentUser = mockUsers[1]; // Amara Osei â€” learner
 
 function setCurrentUser(predicate: (u: User) => boolean): boolean {
   const next = mockUsers.find(predicate);

@@ -19,7 +19,7 @@ import { QuizOverlay } from "./quiz-overlay";
 import { VideoPlayer } from "./video-player";
 import { CertificateEarnedModal } from "./certificate-modal";
 import { LiveSession } from "./live-session";
-import type {
+import {
   Lesson,
   Quiz,
   LearnerProgress,

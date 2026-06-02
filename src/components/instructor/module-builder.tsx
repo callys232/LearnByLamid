@@ -15,7 +15,7 @@ import {
   Download,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { LessonType } from "@/types/types";
+import { LessonType } from "@/types/types";
 
 export interface LessonDraft {
   id: string;

@@ -14,7 +14,7 @@ import {
   Progress,
 } from "@/components/ui";
 import { cn, formatMinutes } from "@/lib/utils";
-import type { Course, Module, Lesson, LearnerProgress } from "@/types/types";
+import { Course, Module, Lesson, LearnerProgress } from "@/types/types";
 
 interface CourseProgressPanelProps {
   course: Course;

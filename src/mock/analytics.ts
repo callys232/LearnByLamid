@@ -1,4 +1,4 @@
-import type {
+﻿import {
   CourseAnalytics,
   PlatformAnalytics,
   LearnerProgress,

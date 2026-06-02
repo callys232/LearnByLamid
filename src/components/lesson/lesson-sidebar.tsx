@@ -14,7 +14,7 @@ import {
 import { cn, formatMinutes } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
 import { isModuleUnlocked } from "@/lib/module-unlock";
-import type { Module, Lesson, LearnerProgress } from "@/types/types";
+import { Module, Lesson, LearnerProgress } from "@/types/types";
 
 interface LessonSidebarProps {
   courseId: string;

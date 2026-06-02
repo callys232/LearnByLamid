@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { User } from "@/types/types";
+import { User } from "@/types/types";
 import { currentUser as mockCurrentUser, mockUsers } from "@/mock/users";
 
 interface AuthContextValue {

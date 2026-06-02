@@ -13,7 +13,7 @@ import {
   BookmarkCheck,
 } from "lucide-react";
 import { cn, formatMinutes } from "@/lib/utils";
-import type { EventFormat, LearningEvent, Course } from "@/types/types";
+import { EventFormat, LearningEvent, Course } from "@/types/types";
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 

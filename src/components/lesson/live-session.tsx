@@ -1,7 +1,7 @@
 ﻿import Link from "next/link";
 import { Radio, PlayCircle, Calendar, Clock, ExternalLink } from "lucide-react";
 import { cn, formatMinutes } from "@/lib/utils";
-import type { LearningEvent } from "@/types/types";
+import { LearningEvent } from "@/types/types";
 
 interface LiveSessionProps {
   event: LearningEvent | null;

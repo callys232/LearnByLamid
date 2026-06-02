@@ -7,7 +7,7 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { setCurrentUserById } from "@/mock/users";
-import type { AccountType } from "@/types/types";
+import { AccountType } from "@/types/types";
 
 export function RegisterForm() {
   const router = useRouter();

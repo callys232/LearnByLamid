@@ -3,7 +3,7 @@ import { Clock, Users, Star, BookOpen, CheckCircle2 } from "lucide-react";
 import { Progress } from "@/components/ui";
 import { cn, formatNumber } from "@/lib/utils";
 import { mockUsers } from "@/mock/users";
-import type { Course } from "@/types/types";
+import { Course } from "@/types/types";
 
 interface CourseCardProps {
   course: Course;

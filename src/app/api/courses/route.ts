@@ -1,6 +1,6 @@
 ﻿import { NextResponse } from "next/server";
 import { mockCourses } from "@/mock/courses";
-import type { Course, AccessType, ContentStatus } from "@/types/types";
+import { Course, AccessType, ContentStatus } from "@/types/types";
 
 interface CourseRequest {
   title: string;

@@ -1,4 +1,4 @@
-import type { Notification } from "@/types/types";
+﻿import { Notification } from "@/types/types";
 
 export const mockNotifications: Notification[] = [
   {
@@ -15,7 +15,7 @@ export const mockNotifications: Notification[] = [
     id: "notif-002",
     userId: "user-001",
     type: "cert_issued",
-    title: "Certificate issued 🎉",
+    title: "Certificate issued ðŸŽ‰",
     body: "Your UX Research Methods certificate is ready to download",
     read: false,
     createdAt: "2026-05-06T10:00:00Z",
@@ -35,8 +35,8 @@ export const mockNotifications: Notification[] = [
     id: "notif-004",
     userId: "user-001",
     type: "badge_earned",
-    title: "Badge unlocked 🔥",
-    body: "You've hit a 12-day learning streak — On Fire!",
+    title: "Badge unlocked ðŸ”¥",
+    body: "You've hit a 12-day learning streak â€” On Fire!",
     read: true,
     createdAt: "2026-05-03T20:00:00Z",
   },
